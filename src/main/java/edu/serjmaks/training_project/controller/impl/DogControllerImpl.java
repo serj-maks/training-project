@@ -22,6 +22,7 @@ public class DogControllerImpl implements DogController {
     private final DogMapper dogMapper;
     private final DogServiceImpl dogService;
 
+    //
     @Override
     public List<DogLiteResponseDto> getAll() {
         log.debug("getAll - start");
