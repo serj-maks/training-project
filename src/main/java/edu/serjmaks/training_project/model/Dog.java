@@ -7,9 +7,15 @@ import jakarta.persistence.*;
 public class Dog {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column
+    @SequenceGenerator(name = "dog_id_seq", sequenceName = "dog_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dog_id_seq")
     private int id;
+
+    @Column
     private String name;
+
+    @Column
     private int age;
 
     public Dog() {
