@@ -4,14 +4,12 @@ import edu.serjmaks.training_project.model.Cat;
 import edu.serjmaks.training_project.service.CatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/cat")
-@Controller
 @RequiredArgsConstructor
 public class CatController {
 
@@ -52,5 +50,14 @@ public class CatController {
     public String delete(@RequestParam Integer id) {
         catService.delete(id);
         return "cat was deleted successfully";
+    }
+
+    //метод для демонстрации работы аннотаций @RestControllerAdvice и @ExceptionHandler
+    //поведение описано в классе exception/GlobalExceptionHandler
+    @GetMapping("/testControllerAdvice")
+    public void testControllerAdvice() {
+        if (true) {
+            throw new IllegalArgumentException("некорректный запрос!");
+        }
     }
 }

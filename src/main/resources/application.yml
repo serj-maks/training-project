@@ -1,9 +1,27 @@
 spring:
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/testdb?allowPublicKeyRetrieval=true
     username: root
     password: password
+    hikari:
+      maximum-pool-size: 10   # максимальное количество соединений в пуле
+      minimum-idle: 2         # минимальное количество соединений в режиме простоя
+      idle-timeout: 30000      # время простоя перед закрытием соединения (мс)
+      connection-timeout: 20000 # время ожидания соединения (мс)
 
   jpa:
+    open-in-view: false  # закрывать EntityManager после запроса (оптимизация)
+    show-sql: true # пишем в лог все sql, которые выполняются
     hibernate:
-      ddl-auto: create
+      ddl-auto: create # автоматически создаем таблицы и связи между ними
+
+  profiles:
+    active: dev
+
+logging:
+  level:
+    root: DEBUG
+    edu.serjmaks.training_project: DEBUG
+    org.springframework: DEBUG
+    org.hibernate: DEBUG
