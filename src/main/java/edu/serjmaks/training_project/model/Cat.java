@@ -1,9 +1,11 @@
 package edu.serjmaks.training_project.model;
 
 import jakarta.persistence.*;
+import lombok.experimental.Accessors;
 
 @Entity
 @Table(name="cat")
+@Accessors(chain = true)
 public class Cat {
 
     @Id

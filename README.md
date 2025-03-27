@@ -56,3 +56,9 @@ DELETE
 
 ## 01
 работа с сущностью dog уже по-сложнее - используется dto+маппинг при помощи mapstruct
+
+
+## actuator
+- настраивается в application.yml
+- чтобы попасть в актуатор, после запуска приложения перейди по ссылке `http://localhost:8080/actuator`
+- документация по настройкам [тут](https://docs.spring.io/spring-boot/reference/actuator/endpoints.html)
