@@ -1,6 +1,10 @@
 spring:
+  application:
+    name: training-project
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
+    # url: jdbc:mysql://mysql-container:3306/testdb?allowPublicKeyRetrieval=true
     url: jdbc:mysql://localhost:3306/testdb?allowPublicKeyRetrieval=true
     username: root
     password: password
@@ -9,15 +13,22 @@ spring:
       minimum-idle: 2         # минимальное количество соединений в режиме простоя
       idle-timeout: 30000      # время простоя перед закрытием соединения (мс)
       connection-timeout: 20000 # время ожидания соединения (мс)
+      initialization-fail-timeout: 0
 
   jpa:
     open-in-view: false  # закрывать EntityManager после запроса (оптимизация)
     show-sql: true # пишем в лог все sql, которые выполняются
     hibernate:
       ddl-auto: create # автоматически создаем таблицы и связи между ними
+    properties:
+       hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
 
   profiles:
     active: dev
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27817/app
 
 logging:
   level:

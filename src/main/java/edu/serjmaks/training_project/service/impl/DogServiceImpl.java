@@ -37,6 +37,14 @@ public class DogServiceImpl implements DogService {
     @Transactional
     @Override
     public Dog create(Dog dog) {
+        if (dogRepository.existsByName(dog.getName())) {
+            // здесь выбрасывается именно IllegalArgumentException, чтобы сработал код в
+            // классе exception/GlobalExceptionHandler
+            throw new IllegalArgumentException("Dog with same name already exists");
+        }
+        if (dogRepository.existsByAge(dog.getAge())) {
+            throw new IllegalArgumentException("Dog with same age already exists");
+        }
         return dogRepository.save(dog);
     }
 

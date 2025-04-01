@@ -1,4 +1,4 @@
-package edu.serjmaks.training_project.controller;
+package edu.serjmaks.training_project;
 
 import edu.serjmaks.training_project.repository.CatRepository;
 import edu.serjmaks.training_project.repository.DogRepository;

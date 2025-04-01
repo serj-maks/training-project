@@ -62,3 +62,29 @@ DELETE
 - настраивается в application.yml
 - чтобы попасть в актуатор, после запуска приложения перейди по ссылке `http://localhost:8080/actuator`
 - документация по настройкам [тут](https://docs.spring.io/spring-boot/reference/actuator/endpoints.html)
+
+
+## упаковка в war и jar
+- в pom.xml поменять `<packaging>jar</packaging>` или `<packaging>war</packaging>`
+- запустить mvn clean package -DskipTests
+- .jar или .war появиться в target
+
+### запуск jar
+- скопитовать .jar-файл из target (например, в Desktop)
+- выполнить в консоли `java -jar ".\app-name.jar"`
+
+
+## упаковка в докер
+сейчас из зависимых контейнеров есть только mysql, поэтому нужно добавить его в общую сеть:
+- раскоментировать в application.yml строку: `url: jdbc:mysql://mysql-container:3306/testdb?allowPublicKeyRetrieval=true`
+- создать сеть с именем my-network
+`docker network create my-network`
+- запустить mysql-контейнер в созданной сети
+`docker run --name mysql-container --network my-network -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=testdb -p 3306:3306 -d mysql`
+- собрать training-project 
+`mvn clean package -DSkipTests`
+- собрать docker-image
+`docker build -t training-project .` 
+- запустить docker-контейнер в созданной сети
+`docker run --name training-project-container --network my-network -p 8080:8080 -e SPRING_PROFILES_ACTIVE=dev training-project`
+ 

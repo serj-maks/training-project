@@ -1,5 +1,6 @@
 package edu.serjmaks.training_project.service.impl;
 
+import edu.serjmaks.training_project.exception.AlreadyExistsException;
 import edu.serjmaks.training_project.model.Cat;
 import edu.serjmaks.training_project.repository.CatRepository;
 import edu.serjmaks.training_project.service.CatService;
@@ -31,6 +32,12 @@ public class CatServiceImpl implements CatService {
     @Transactional
     @Override
     public String create(Cat cat) {
+        if (catRepository.existsByName(cat.getName())) {
+            throw new AlreadyExistsException(Cat.class, cat.getName());
+        }
+        if (catRepository.existsByAge(cat.getAge())) {
+            throw new AlreadyExistsException(Cat.class, cat.getAge());
+        }
         catRepository.save(cat);
         return "success!";
     }

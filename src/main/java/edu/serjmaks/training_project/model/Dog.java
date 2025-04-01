@@ -1,11 +1,9 @@
 package edu.serjmaks.training_project.model;
 
 import jakarta.persistence.*;
-import lombok.experimental.Accessors;
 
 @Entity
 @Table(name="dog")
-@Accessors(chain = true)
 public class Dog {
 
     @Id
@@ -22,6 +20,11 @@ public class Dog {
 
     public Dog() {
 
+    }
+
+    public Dog(String name, int age) {
+        this.name = name;
+        this.age = age;
     }
 
     public Dog(int id, String name, int age) {
