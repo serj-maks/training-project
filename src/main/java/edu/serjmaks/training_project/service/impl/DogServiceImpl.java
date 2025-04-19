@@ -5,29 +5,25 @@ import edu.serjmaks.training_project.mapper.DogMapper;
 import edu.serjmaks.training_project.model.Dog;
 import edu.serjmaks.training_project.repository.DogRepository;
 import edu.serjmaks.training_project.service.DogService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class DogServiceImpl implements DogService {
 
     private final DogRepository dogRepository;
     private final DogMapper dogMapper;
 
-    DogServiceImpl(DogRepository dogRepository, DogMapper dogMapper) {
-        this.dogRepository = dogRepository;
-        this.dogMapper = dogMapper;
-    }
-
-    @Transactional(readOnly = true)
     @Override
     public List<Dog> getAll() {
         return dogRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Dog getById(Integer id) {
         return dogRepository.findById(id)
@@ -48,6 +44,7 @@ public class DogServiceImpl implements DogService {
         return dogRepository.save(dog);
     }
 
+    @Transactional
     @Override
     public Dog update(Dog newDog, Integer id) {
         Dog dog = getById(id);
@@ -55,6 +52,7 @@ public class DogServiceImpl implements DogService {
         return dogRepository.save(dog);
     }
 
+    @Transactional
     @Override
     public void deleteById(Integer id) {
         if (!dogRepository.existsById(id)) {
@@ -62,5 +60,4 @@ public class DogServiceImpl implements DogService {
         }
         dogRepository.deleteById(id);
     }
-
 }

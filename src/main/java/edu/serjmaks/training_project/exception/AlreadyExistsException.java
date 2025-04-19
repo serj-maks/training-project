@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class AlreadyExistsException extends RuntimeException {
 
     public AlreadyExistsException(Class<?> entity, Object subject) {
-        super(String.format("'%s' with '%s' already exists", entity.getSimpleName(), subject));
+        super(String.format("'%s' with field: '%s' already exists", entity.getSimpleName(), subject));
     }
 }

@@ -1,58 +1,64 @@
 package edu.serjmaks.training_project.service.impl;
 
 import edu.serjmaks.training_project.exception.AlreadyExistsException;
+import edu.serjmaks.training_project.exception.NotFoundException;
+import edu.serjmaks.training_project.mapper.CatMapper;
 import edu.serjmaks.training_project.model.Cat;
 import edu.serjmaks.training_project.repository.CatRepository;
 import edu.serjmaks.training_project.service.CatService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class CatServiceImpl implements CatService {
-    CatRepository catRepository;
 
-    CatServiceImpl(CatRepository catRepository) {
-        this.catRepository = catRepository;
-    }
+    private final CatRepository catRepository;
+    private final CatMapper catMapper;
 
-    @Transactional(readOnly = true)
     @Override
     public List<Cat> getAll() {
         return catRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     @Override
-    public Cat get(Integer id) {
-        return catRepository.findById(id).get();
+    public Cat getById(Integer id) {
+        return catRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(Cat.class, id));
     }
 
     @Transactional
     @Override
-    public String create(Cat cat) {
+    public Cat create(Cat cat) {
         if (catRepository.existsByName(cat.getName())) {
             throw new AlreadyExistsException(Cat.class, cat.getName());
         }
         if (catRepository.existsByAge(cat.getAge())) {
             throw new AlreadyExistsException(Cat.class, cat.getAge());
         }
-        catRepository.save(cat);
-        return "success!";
+        return catRepository.save(cat);
     }
 
     @Transactional
     @Override
-    public String update(Cat cat) {
-        catRepository.save(cat);
-        return "success!";
+    //TODO: проверить, работает ли в CatMapper.updateCat вариант, где возвращаем объект
+    // вместо void - если будут проблемы, сделать как в DogMapper.updateDog (т.е. метод void)
+    public Cat update(Cat newCat, Integer id) {
+        Cat oldCat = getById(id);
+        Cat updatedCat = catMapper.updateCat(newCat, oldCat);
+        return catRepository.save(updatedCat);
     }
 
     @Transactional
     @Override
-    public String delete(Integer id) {
+    public void deleteById(Integer id) {
+        if (!catRepository.existsById(id)) {
+            throw new NotFoundException(Cat.class, id);
+        }
         catRepository.deleteById(id);
-        return "success!";
     }
 }

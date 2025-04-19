@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface CatService {
     List<Cat> getAll();
-    Cat get(Integer id);
-    String create(Cat cat);
-    String update(Cat cat);
-    String delete(Integer id);
+    Cat getById(Integer id);
+    Cat create(Cat cat);
+    Cat update(Cat cat, Integer id);
+    void deleteById(Integer id);
 }

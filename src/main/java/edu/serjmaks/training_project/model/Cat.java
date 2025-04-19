@@ -1,17 +1,22 @@
 package edu.serjmaks.training_project.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+@Data
 @Entity
-@Table(name="cat")
+@Table(name = "cat")
 @Accessors(chain = true)
+@NoArgsConstructor
 public class Cat {
 
     @Id
     @Column
-    //TODO: если не заведется - измени примитив на объект
-    private int id;
+    @GeneratedValue(generator = "cat_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "cat_seq", sequenceName = "cat_id_seq", allocationSize = 1)
+    private Integer id;
 
     @Column
     private String name;
@@ -19,49 +24,7 @@ public class Cat {
     @Column
     private int age;
 
-    @OneToOne
-    @JoinColumn(name = "human_id")
+    @ManyToOne
+    @JoinColumn(name = "human_id", nullable = true)
     private Human human;
-
-    public Cat() {
-
-    }
-
-    public Cat(int id, String name, int age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public Human getHuman() {
-        return human;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setHuman(Human human) {
-        this.human = human;
-    }
 }

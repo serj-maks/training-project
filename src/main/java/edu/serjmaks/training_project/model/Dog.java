@@ -1,16 +1,22 @@
 package edu.serjmaks.training_project.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
+@Data
 @Entity
-@Table(name="dog")
+@Table(name = "dog")
+@Accessors(chain = true)
+@NoArgsConstructor
 public class Dog {
 
     @Id
     @Column
-    @SequenceGenerator(name = "dog_id_seq", sequenceName = "dog_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dog_id_seq")
-    private int id;
+    @SequenceGenerator(name = "dog_seq", sequenceName = "dog_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dog_seq")
+    private Integer id;
 
     @Column
     private String name;
@@ -18,42 +24,7 @@ public class Dog {
     @Column
     private int age;
 
-    public Dog() {
-
-    }
-
-    public Dog(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    public Dog(int id, String name, int age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
+    @ManyToOne
+    @JoinColumn(name = "human_id", nullable = true)
+    private Human human;
 }

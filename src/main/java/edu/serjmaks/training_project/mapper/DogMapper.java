@@ -24,5 +24,5 @@ public interface DogMapper {
     DogResponseDto toDogResponseDto(Dog dog);
 
     @Mapping(target = "id", ignore = true)
-    void updateDog(Dog newDog, @MappingTarget Dog oldTask);
+    void updateDog(Dog newDog, @MappingTarget Dog oldDog);
 }
