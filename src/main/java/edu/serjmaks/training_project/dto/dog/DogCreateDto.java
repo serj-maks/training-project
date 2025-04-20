@@ -6,5 +6,5 @@ import lombok.Builder;
 
 @Builder
 public record DogCreateDto(@NotBlank String name,
-                           @NotNull Integer age) {
+                           @NotNull int age) {
 }
