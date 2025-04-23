@@ -27,6 +27,6 @@ public class Task {
     @Column
     private String description;
 
-    @ManyToMany(mappedBy = "tasks")
+    @ManyToMany(mappedBy = "tasks", fetch = FetchType.LAZY)
     private List<Human> humans = new ArrayList<>();
 }

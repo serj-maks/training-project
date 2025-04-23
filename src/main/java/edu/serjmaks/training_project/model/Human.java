@@ -27,7 +27,7 @@ public class Human {
     @Column
     private int age;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "human_task",
             joinColumns = @JoinColumn(name = "human_id"),
             inverseJoinColumns = @JoinColumn(name = "task_id")

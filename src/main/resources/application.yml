@@ -21,7 +21,9 @@ spring:
     hibernate:
       ddl-auto: create # автоматически создаем таблицы и связи между ними
     properties:
-       hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+      hibernate:
+        hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
 
   profiles:
     active: dev
@@ -37,7 +39,8 @@ logging:
     edu.serjmaks.training_project: INFO
     #edu.serjmaks.training_project: DEBUG
     #org.springframework: DEBUG
-    #org.hibernate: DEBUG
+    #org.hibernate.SQL: DEBUG
+    #org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
 # actuator
 management:

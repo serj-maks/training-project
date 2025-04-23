@@ -19,7 +19,7 @@ public interface CatController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    CatResponseDto getById(@PathVariable Integer id);
+    CatResponseDto getById(@PathVariable("id") Integer id);
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -28,9 +28,9 @@ public interface CatController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     CatResponseDto update(@RequestBody @Valid CatUpdateDto dto,
-                          @PathVariable Integer id);
+                          @PathVariable("id") Integer id);
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    void deleteById(@PathVariable Integer id);
+    void deleteById(@PathVariable("id") Integer id);
 }

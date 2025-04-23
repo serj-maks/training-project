@@ -19,7 +19,7 @@ public interface DogController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    DogResponseDto getById(@PathVariable Integer id);
+    DogResponseDto getById(@PathVariable("id") Integer id);
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -28,9 +28,9 @@ public interface DogController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     DogResponseDto update(@RequestBody @Valid DogUpdateDto dto,
-                          @PathVariable Integer id);
+                          @PathVariable("id") Integer id);
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    void deleteById(@PathVariable Integer id);
+    void deleteById(@PathVariable("id") Integer id);
 }

@@ -24,7 +24,7 @@ public class Dog {
     @Column
     private int age;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "human_id", nullable = true)
     private Human human;
 }
