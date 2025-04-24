@@ -22,6 +22,6 @@ public class LoggingAspect {
         returning = "result")
     public void after(JoinPoint joinPoint, Object result) {
         Logger logger = LoggerFactory.getLogger(joinPoint.getTarget().getClass());
-        logger.info("end method. Result: " + result);
+        logger.info("end method: '{}'. Result: '{}'", joinPoint.getSignature().getName(), result);
     }
 }

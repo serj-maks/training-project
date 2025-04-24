@@ -17,6 +17,6 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     List<Task> findAll();
 
     @Override
-    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = "humans")
+    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = {"humans", "humans.tasks"})
     Optional<Task> findById(Integer id);
 }

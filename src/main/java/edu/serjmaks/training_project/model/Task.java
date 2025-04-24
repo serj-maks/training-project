@@ -27,7 +27,6 @@ public class Task {
     @Column
     private String description;
 
-    //TODO: проверить, нужно ли и здесь указывать FetchType.LAZY, как в human
     @ManyToMany(mappedBy = "tasks", fetch = FetchType.LAZY)
     private List<Human> humans = new ArrayList<>();
 }

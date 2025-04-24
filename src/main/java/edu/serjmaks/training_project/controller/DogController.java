@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/dog")
+@RequestMapping("api/dogs")
 public interface DogController {
 
     @GetMapping

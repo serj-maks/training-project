@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/human")
+@RequestMapping("api/humans")
 public interface HumanController {
 
     @GetMapping("/{id}")

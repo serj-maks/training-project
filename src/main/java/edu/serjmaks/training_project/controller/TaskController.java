@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/task")
+@RequestMapping("api/tasks")
 public interface TaskController {
 
     @GetMapping("/{id}")
