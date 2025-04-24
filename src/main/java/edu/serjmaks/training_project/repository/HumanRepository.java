@@ -13,6 +13,7 @@ public interface HumanRepository extends JpaRepository<Human, Integer> {
     boolean existsByName(String name);
     boolean existsByAge(int age);
 
+    @Override
     @EntityGraph(attributePaths = "tasks")
     List<Human> findAll();
 

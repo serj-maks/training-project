@@ -4,6 +4,7 @@ import edu.serjmaks.training_project.exception.AlreadyExistsException;
 import edu.serjmaks.training_project.exception.NotFoundException;
 import edu.serjmaks.training_project.mapper.HumanMapper;
 import edu.serjmaks.training_project.model.Human;
+import edu.serjmaks.training_project.model.Task;
 import edu.serjmaks.training_project.repository.HumanRepository;
 import edu.serjmaks.training_project.service.HumanService;
 import lombok.RequiredArgsConstructor;
@@ -55,6 +56,9 @@ public class HumanServiceImpl implements HumanService {
     @Transactional
     @Override
     public void deleteById(Integer id) {
+        if (!humanRepository.existsById(id)) {
+            throw new NotFoundException(Human.class, id);
+        }
         humanRepository.deleteById(id);
     }
 }
