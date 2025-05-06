@@ -8,6 +8,7 @@ import edu.serjmaks.training_project.model.Task;
 import edu.serjmaks.training_project.repository.HumanRepository;
 import edu.serjmaks.training_project.service.HumanService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,6 +48,7 @@ public class HumanServiceImpl implements HumanService {
 
     @Transactional
     @Override
+    @Retryable(maxAttempts = 15)
     public Human update(Human newHuman, Integer id) {
         Human human = getById(id);
         humanMapper.updateHuman(newHuman, human);

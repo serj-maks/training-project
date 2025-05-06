@@ -6,6 +6,7 @@ import edu.serjmaks.training_project.model.Dog;
 import edu.serjmaks.training_project.repository.DogRepository;
 import edu.serjmaks.training_project.service.DogService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,6 +47,7 @@ public class DogServiceImpl implements DogService {
 
     @Transactional
     @Override
+    @Retryable(maxAttempts = 15)
     public Dog update(Dog newDog, Integer id) {
         Dog dog = getById(id);
         dogMapper.updateDog(newDog, dog);

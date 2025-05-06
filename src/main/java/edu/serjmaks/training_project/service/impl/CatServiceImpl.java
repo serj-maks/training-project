@@ -7,6 +7,7 @@ import edu.serjmaks.training_project.model.Cat;
 import edu.serjmaks.training_project.repository.CatRepository;
 import edu.serjmaks.training_project.service.CatService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,8 +46,7 @@ public class CatServiceImpl implements CatService {
 
     @Transactional
     @Override
-    //TODO: проверить, работает ли в CatMapper.updateCat вариант, где возвращаем объект
-    // вместо void - если будут проблемы, сделать как в DogMapper.updateDog (т.е. метод void)
+    @Retryable(maxAttempts = 15)
     public Cat update(Cat newCat, Integer id) {
         Cat oldCat = getById(id);
         Cat updatedCat = catMapper.updateCat(newCat, oldCat);

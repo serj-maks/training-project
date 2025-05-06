@@ -7,6 +7,7 @@ import edu.serjmaks.training_project.model.Task;
 import edu.serjmaks.training_project.repository.TaskRepository;
 import edu.serjmaks.training_project.service.TaskService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +43,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Transactional
     @Override
+    @Retryable(maxAttempts = 15)
     public Task update(Task newTask, Integer id) {
         Task task = getById(id);
         taskMapper.updateTask(newTask, task);

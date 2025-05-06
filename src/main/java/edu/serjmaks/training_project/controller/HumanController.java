@@ -4,7 +4,6 @@ import edu.serjmaks.training_project.dto.human.HumanCreateDto;
 import edu.serjmaks.training_project.dto.human.HumanLiteResponseDto;
 import edu.serjmaks.training_project.dto.human.HumanResponseDto;
 import edu.serjmaks.training_project.dto.human.HumanUpdateDto;
-import edu.serjmaks.training_project.model.Human;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

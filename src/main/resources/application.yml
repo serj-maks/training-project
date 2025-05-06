@@ -14,6 +14,7 @@ spring:
       idle-timeout: 30000      # время простоя перед закрытием соединения (мс)
       connection-timeout: 20000 # время ожидания соединения (мс)
       initialization-fail-timeout: 0
+      transaction-isolation: TRANSACTION_READ_COMMITTED
 
   jpa:
     open-in-view: false  # закрывать EntityManager после запроса (оптимизация)

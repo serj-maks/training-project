@@ -14,7 +14,7 @@ public interface HumanRepository extends JpaRepository<Human, Integer> {
     boolean existsByAge(int age);
 
     @Override
-    @EntityGraph(attributePaths = "tasks")
+    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = "tasks")
     List<Human> findAll();
 
     @Override

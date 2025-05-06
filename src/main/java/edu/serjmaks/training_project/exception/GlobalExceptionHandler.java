@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.BAD_REQUEST.value());
-        body.put("error", "Not Found");
+        body.put("error", "Already Exists");
         // здесь будет сообщение из кастомного класса-исключения AlreadyExistsException: "'%s' with field: '%s' already exists"
         body.put("message", e.getMessage());
         body.put("path", request.getRequestURI());
