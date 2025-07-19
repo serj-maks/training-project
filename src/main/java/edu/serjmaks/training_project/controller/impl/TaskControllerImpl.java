@@ -35,8 +35,8 @@ public class TaskControllerImpl implements TaskController {
     @Override
     public TaskResponseDto create(TaskCreateDto dto) {
         Task task = taskMapper.toTask(dto);
-        Task createdTas = taskService.create(task);
-        return taskMapper.toTaskResponseDto(createdTas);
+        Task createdTask = taskService.create(task);
+        return taskMapper.toTaskResponseDto(createdTask);
     }
 
     @Override

@@ -19,7 +19,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(AlreadyExistsException.class)
-    public ResponseEntity<Map<String, Object>> handleAlreadyExistsException(AlreadyExistsException e, HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> handleAlreadyExistsException(AlreadyExistsException e,
+                                                                            HttpServletRequest request) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.BAD_REQUEST.value());
@@ -31,7 +32,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleNotFoundException(NotFoundException e, HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> handleNotFoundException(NotFoundException e,
+                                                                       HttpServletRequest request) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.NOT_FOUND.value());

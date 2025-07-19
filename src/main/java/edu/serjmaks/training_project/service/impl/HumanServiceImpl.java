@@ -43,6 +43,7 @@ public class HumanServiceImpl implements HumanService {
         if (humanRepository.existsByName(human.getName())) {
             throw new AlreadyExistsException(Human.class, human.getName());
         }
+
         return humanRepository.save(human);
     }
 
@@ -61,6 +62,7 @@ public class HumanServiceImpl implements HumanService {
         if (!humanRepository.existsById(id)) {
             throw new NotFoundException(Human.class, id);
         }
+
         humanRepository.deleteById(id);
     }
 }
